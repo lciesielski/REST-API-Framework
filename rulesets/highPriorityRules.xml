@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="ApexFull"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+   <description>Apex language best practices ruleset</description>
+
+   <!-- Best Practices -->
+
+   <rule ref="category/apex/bestpractices.xml/ApexUnitTestClassShouldHaveAsserts" 
+      message="Unit tests must have at least one assertion">
+      <priority>1</priority>
+   </rule>
+
+   <rule ref="category/apex/bestpractices.xml/ApexUnitTestMethodShouldHaveIsTestAnnotation" 
+      message="Unit test methods must have isTest annotation instead of testMethod modifier">
+      <priority>1</priority>
+   </rule>
+
+   <rule ref="category/apex/bestpractices.xml/ApexUnitTestShouldNotUseSeeAllDataTrue" 
+      message="Unit tests must not use SeAllData=true annotation unless explicitly required">
+      <priority>1</priority>
+   </rule>
+
+   <rule ref="category/apex/bestpractices.xml/AvoidLogicInTrigger" 
+      message="Triggers should be logicless and should only consist of executing handler class">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/bestpractices.xml/DebugsShouldUseLoggingLevel" 
+      message="Debugs must use logging level">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/bestpractices.xml/UnusedLocalVariable" 
+      message="Logic must not have any unused variables">
+      <priority>1</priority>
+   </rule>
+
+   <!-- Codestyle -->
+
+   <rule ref="category/apex/codestyle.xml/ClassNamingConventions" 
+      message="Class must be declared with proper name">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/codestyle.xml/FieldDeclarationsShouldBeAtStart" 
+      message="Field must be declared at the top of their class">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/codestyle.xml/FieldNamingConventions" 
+      message="Field must be declared with proper name">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/codestyle.xml/ForLoopsMustUseBraces" 
+      message="For loop must use braces">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/codestyle.xml/FormalParameterNamingConventions" 
+      message="Parameter must be declared with proper name">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/codestyle.xml/IfElseStmtsMustUseBraces" 
+      message="If else statement must use braces">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/codestyle.xml/IfStmtsMustUseBraces" 
+      message="If statement must use braces">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/codestyle.xml/MethodNamingConventions" 
+      message="Method must be declared with proper name">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/codestyle.xml/PropertyNamingConventions" 
+      message="Property must be declared with proper name">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/codestyle.xml/WhileLoopsMustUseBraces" 
+      message="While loop must use braces">
+      <priority>2</priority>
+   </rule>
+
+   <!-- Design -->
+
+   <rule ref="category/apex/design.xml/ExcessivePublicCount" 
+      message="Too many public variables should be avoided">
+      <priority>2</priority>
+   </rule>
+
+   <!-- Errorprone -->
+
+   <rule ref="category/apex/errorprone.xml/ApexCSRF" 
+      message="Avoid DML in initializers">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/errorprone.xml/AvoidDirectAccessTriggerMap" 
+      message="Avoid accessing Trigger.New and Trigger.Old variables directly">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/errorprone.xml/AvoidHardcodingId" 
+      message="IDs must not be hardcoded unless explicitly required">
+      <priority>1</priority>
+   </rule>
+
+   <rule ref="category/apex/errorprone.xml/AvoidNonExistentAnnotations" 
+      message="Non existing annotations must be avoided">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/errorprone.xml/EmptyCatchBlock" 
+      message="Empty catch blocks must be avoided">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/errorprone.xml/EmptyIfStmt" 
+      message="Empty If statements must be avoided">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/errorprone.xml/EmptyStatementBlock" 
+      message="Empty statements must be avoided">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/errorprone.xml/EmptyTryOrFinallyBlock" 
+      message="Empty try and finally statements must be avoided">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/errorprone.xml/EmptyWhileStmt" 
+      message="Empty while statements must be avoided">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/errorprone.xml/InaccessibleAuraEnabledGetter" 
+      message="Aura enabled variable must have publicly available getter">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/errorprone.xml/MethodWithSameNameAsEnclosingClass" 
+      message="Non Contructor methods must not have the same name as enclosing class">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/errorprone.xml/OverrideBothEqualsAndHashcode" 
+      message="Override both equals, and hashCode, or override neither">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/errorprone.xml/TestMethodsMustBeInTestClasses" 
+      message="Test methods must be enclosed in test class">
+      <priority>1</priority>
+   </rule>
+
+   <!-- Performance -->
+
+   <rule ref="category/apex/performance.xml/AvoidDebugStatements" 
+      message="Debug log statements should be avoided unless explicitly required">
+      <priority>1</priority>
+   </rule>
+
+   <rule ref="category/apex/performance.xml/OperationWithLimitsInLoop" 
+      message="Certain operations must not be called inside a loop">
+      <priority>1</priority>
+   </rule>
+
+   <!-- Security -->
+
+   <rule ref="category/apex/security.xml/ApexBadCrypto" 
+      message="Encryption keys must not be hardcoded">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/security.xml/ApexDangerousMethods" 
+      message="Debug logs should not log sensitive data">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/security.xml/ApexInsecureEndpoint" 
+      message="Insecure endpoints should not be called unless explicitly required">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/security.xml/ApexOpenRedirect" 
+      message="Redirections should be validated">
+      <priority>2</priority>
+   </rule>
+
+   <rule ref="category/apex/security.xml/ApexSOQLInjection" 
+      message="Dynamic queries should escape untrusted variables">
+      <priority>2</priority>
+   </rule>
+
+</ruleset>

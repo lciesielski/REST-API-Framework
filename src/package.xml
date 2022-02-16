@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>ExceptionUtils</members>
+        <members>LogUtils</members>
+        <members>LogUtilsTest</members>
+        <members>RestApiErrorResult</members>
+        <members>RestApiResult</members>
+        <members>RestApiSuccessResult</members>
+        <members>RestApiUtils</members>
+        <members>UserRestApi</members>
+        <name>ApexClass</name>
+    </types>
+    <version>53.0</version>
+</Package>

@@ -1,0 +1,9 @@
+<project name="GitHub CI Validation" basedir="." xmlns:sf="antlib:com.salesforce">
+
+	<taskdef uri="antlib:com.salesforce" resource="com/salesforce/antlib.xml" classpath="${basedir}/migration/ant-salesforce.jar"/>
+
+	<target name="validate">
+		<sf:deploy username="${sf.username}" password="${sf.password}" serverurl="https://login.salesforce.com" maxPoll="20" deployRoot="src" rollbackOnError="true"  testlevel="RunLocalTests" checkOnly="true" ignoreWarnings="true"/>
+	</target>
+
+</project>

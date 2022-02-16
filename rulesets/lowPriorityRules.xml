@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="ApexFull"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+   <description>Apex language best practices ruleset</description>
+
+   <!-- Best Practices -->
+   <rule ref="category/apex/bestpractices.xml/ApexAssertionsShouldIncludeMessage" 
+      message="Assertion should include user-friendly error message">
+      <priority>4</priority>
+   </rule>
+
+   <rule ref="category/apex/bestpractices.xml/AvoidGlobalModifier" 
+      message="Object should not have global modifier unless explicitly required">
+      <priority>3</priority>
+   </rule>
+
+   <!-- Codestyle -->
+
+   <rule ref="category/apex/codestyle.xml/OneDeclarationPerLine" 
+      message="There should be one declaration per line">
+      <priority>3</priority>
+      <properties>
+         <property name="reportInForLoopInitializer" value="true" />
+         <property name="strictMode" value="true" />
+      </properties>
+   </rule>
+
+   <!-- Design -->
+
+   <rule ref="category/apex/design.xml/AvoidDeeplyNestedIfStmts" 
+      message="Too deeply nested If statements should be avoided">
+      <priority>3</priority>
+      <properties>
+         <property name="problemDepth" value="4" />
+      </properties>
+   </rule>
+
+   <rule ref="category/apex/design.xml/CognitiveComplexity" 
+      message="Too complex methods should be avoided">
+      <priority>3</priority>
+   </rule>
+
+   <rule ref="category/apex/design.xml/CyclomaticComplexity" 
+      message="Too complex methods should be avoided">
+      <priority>3</priority>
+   </rule>
+
+   <rule ref="category/apex/design.xml/ExcessiveClassLength" 
+      message="Too complex classes should be avoided">
+      <priority>3</priority>
+   </rule>
+
+   <rule ref="category/apex/design.xml/ExcessiveParameterList" 
+      message="Too many parameters within single method should be avoided">
+      <priority>3</priority>
+   </rule>
+
+   <rule ref="category/apex/design.xml/NcssConstructorCount" 
+      message="Too complex constructors should be avoided">
+      <priority>4</priority>
+   </rule>
+
+   <rule ref="category/apex/design.xml/NcssMethodCount" 
+      message="Too complex methods should be avoided">
+      <priority>4</priority>
+   </rule>
+
+   <rule ref="category/apex/design.xml/NcssTypeCount" 
+      message="Too complex logic should be avoided">
+      <priority>4</priority>
+   </rule>
+
+   <rule ref="category/apex/design.xml/StdCyclomaticComplexity" 
+      message="Too complex logic should be avoided">
+      <priority>3</priority>
+   </rule>
+
+   <rule ref="category/apex/design.xml/TooManyFields" 
+      message="Too many field declarations should be avoided">
+      <priority>3</priority>
+   </rule>
+
+   <!-- Performance -->
+
+   <rule ref="category/apex/performance.xml/EagerlyLoadedDescribeSObjectResult" 
+      message="Logic should load describe sobjects with proper options">
+      <priority>3</priority>
+      <properties>
+         <property name="noDefault" value="true" />
+      </properties>
+   </rule>
+
+   <!-- Security -->
+
+   <rule ref="category/apex/security.xml/ApexCRUDViolation" 
+      message="Logic should validate CRUD permissions">
+      <priority>3</priority>
+   </rule>
+
+   <rule ref="category/apex/security.xml/ApexSharingViolations" 
+      message="Sharing should be validated">
+      <priority>3</priority>
+   </rule>
+
+   <rule ref="category/apex/security.xml/ApexXSSFromEscapeFalse" 
+      message="Error message variables should be escaped">
+      <priority>3</priority>
+   </rule>
+
+   <rule ref="category/apex/security.xml/ApexXSSFromURLParam" 
+      message="URL parameter variables should be escaped">
+      <priority>3</priority>
+   </rule>
+
+</ruleset>
