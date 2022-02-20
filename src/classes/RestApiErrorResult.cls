@@ -6,13 +6,18 @@ public virtual class RestApiErrorResult extends RestApiResult {
 	private String message;
 
 	public RestApiErrorResult(Exception ex) {
-		this.errorCode = ExceptionUtils.EXCEPTION_TO_REST_RESPONSE_ERROR_CODE.get(ex.getTypeName());
-		this.message = ex.getMessage();
-	}
+		if (!ExceptionUtils.EXCEPTION_TO_REST_RESPONSE_ERROR_CODE.containsKey(ex.getTypeName()) || 
+			!ExceptionUtils.EXCEPTION_TO_REST_RESPONSE_STATUS_CODE.containsKey(ex.getTypeName())
+		) {
+			this.errorCode = 'UNEXPECTED';
+			this.message = ex.getMessage();
+			RestContext.response.statusCode = 500;
+		} else {
+			this.errorCode = ExceptionUtils.EXCEPTION_TO_REST_RESPONSE_ERROR_CODE.get(ex.getTypeName());
+			this.message = ex.getMessage();
 
-	public RestApiErrorResult(String errorCode, String message) {
-		this.errorCode = errorCode;
-		this.message = message;
+			RestContext.response.statusCode = ExceptionUtils.EXCEPTION_TO_REST_RESPONSE_STATUS_CODE.get(ex.getTypeName());
+		}
 	}
 	
 }

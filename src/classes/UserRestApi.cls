@@ -1,7 +1,7 @@
 @RestResource(urlMapping='/v1/users')
 global with sharing class UserRestApi {
 
-	public enum AvailableParameters {
+	public enum WhereEqualsQueryParameters {
 		isActive
 	}
 
@@ -9,23 +9,49 @@ global with sharing class UserRestApi {
 	@ReadOnly
 	WebService static RestApiResult getUserDetails() {
 		try {
-			if (RestApiUtils.isParamPresent(AvailableParameters.isActive.name())) {
-				return new UserListWrapper([
-					SELECT Id 
-					FROM User 
-					WHERE IsActive = :RestApiUtils.isParamTrue(AvailableParameters.isActive.name())
-				]);
+			if (RestApiUtils.isParamPresent(WhereEqualsQueryParameters.isActive.name())) {
+				return new UserListWrapper(new UserQueryConstrutor().executeQuery());
 			} else {
-				throw new ExceptionUtils.RequiredParameterMissingException();
+				throw new ExceptionUtils.RequiredParameterMissingException(
+					'Required parameter missing ' + WhereEqualsQueryParameters.isActive.name()
+				);
 			}
-		} catch (ExceptionUtils.RequiredParameterMissingException ex) {
-			LogUtils.error(UserRestApi.class, ex);
-			return new RestApiErrorResult(ex);
 		} catch (Exception ex) {
-			LogUtils.error(UserRestApi.class, ex);
-			return new RestApiErrorResult(ex);
+			return RestApiUtils.handleException(UserRestApi.class, ex, null);
 		}
 	}
+
+	private class UserQueryConstrutor extends RestApiUtils.GetQueryConstructor {
+
+		public UserQueryConstrutor() {
+			super();
+
+			this.contextSObjectDescription = User.SObjectType.getDescribe();
+			this.fieldSet = new Set<SObjectField> {
+				User.Email, 
+				User.IsActive, 
+				User.Name,
+				User.Username
+			};
+		}
+
+		public List<User> executeQuery() {
+			return (List<User>) Database.query(this.constructQueryFromFieldSet());
+		}
+
+		public override String constructQueryFromFieldSet() {
+			String query = super.constructQueryFromFieldSet();
+
+			for (UserRestApi.WhereEqualsQueryParameters queryEqualsParam : UserRestApi.WhereEqualsQueryParameters.values()) {
+				if (RestApiUtils.isParamPresent(queryEqualsParam.name())) {
+					query += whereEquals(query, queryEqualsParam.name(), RestApiUtils.getParamSafe(queryEqualsParam.name()));
+				}
+			}
+
+			return query;
+		}
+
+	} 
 
 	@TestVisible
 	private class UserListWrapper extends RestApiSuccessResult {
