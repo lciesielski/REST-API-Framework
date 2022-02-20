@@ -10,9 +10,9 @@ public virtual class RestApiErrorResult extends RestApiResult {
 		this.message = ex.getMessage();
 	}
 
-	public RestApiErrorResult(String errorCode, String msg) {
+	public RestApiErrorResult(String errorCode, String message) {
 		this.errorCode = errorCode;
-		this.message = msg;
+		this.message = message;
 	}
 	
 }

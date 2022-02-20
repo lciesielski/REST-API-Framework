@@ -8,7 +8,7 @@ public without sharing class RestApiUtils {
 	}
 
 	public static String getParamSafe(String key) {
-		if (isParamPresent(key)) {
+		if (!isParamPresent(key)) {
 			return '';
 		} else {
 			return RestContext.request.params.get(key);

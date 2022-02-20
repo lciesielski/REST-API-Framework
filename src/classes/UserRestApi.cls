@@ -16,8 +16,11 @@ global with sharing class UserRestApi {
 					WHERE IsActive = :RestApiUtils.isParamTrue(AvailableParameters.isActive.name())
 				]);
 			} else {
-				return new UserListWrapper([SELECT Id FROM User]);
+				throw new ExceptionUtils.RequiredParameterMissingException();
 			}
+		} catch (ExceptionUtils.RequiredParameterMissingException ex) {
+			LogUtils.error(UserRestApi.class, ex);
+			return new RestApiErrorResult(ex);
 		} catch (Exception ex) {
 			LogUtils.error(UserRestApi.class, ex);
 			return new RestApiErrorResult(ex);
