@@ -47,16 +47,34 @@ public without sharing class RestApiUtils {
 			return query;
 		}
 
-		protected virtual String whereEquals(String query, String fieldName, String fieldValue) {
-			String filter = '';
-
-			if (!query.contains('WHERE')) {
-				filter += ' WHERE ';
-			}
-
-			filter += fieldName + '=' + fieldValue;
+		protected String whereBooleanEquals(String query, String fieldName, String fieldValue) {
+			String filter = checkForWhereClause(query);
+			filter += replaceCustomFieldParamSuffix(fieldName) + '=' + fieldValue;
 
 			return filter;
+		}
+
+		protected String whereStringEquals(String query, String fieldName, String fieldValue) {
+			String filter = checkForWhereClause(query);
+			filter += replaceCustomFieldParamSuffix(fieldName) + '=' + encloseInQuotes(fieldValue);
+
+			return filter;
+		}
+
+		private String checkForWhereClause(String query) {
+			if (!query.contains('WHERE')) {
+				return ' WHERE ';
+			} else {
+				return ' AND ';
+			}
+		}
+
+		private String replaceCustomFieldParamSuffix(String fieldName) {
+			return fieldName.replace('CustomField', '__c');
+		}
+
+		private String encloseInQuotes(String fieldName) {
+			return '\'' + fieldName + '\'';
 		}
 
 	}

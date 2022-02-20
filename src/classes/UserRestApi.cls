@@ -2,7 +2,9 @@
 global with sharing class UserRestApi {
 
 	public enum WhereEqualsQueryParameters {
-		isActive
+		isActive,
+		isEmployeeCustomField,
+		username
 	}
 
 	@HttpGet
@@ -22,7 +24,6 @@ global with sharing class UserRestApi {
 	}
 
 	private class UserQueryConstrutor extends RestApiUtils.GetQueryConstructor {
-
 		public UserQueryConstrutor() {
 			super();
 
@@ -42,10 +43,28 @@ global with sharing class UserRestApi {
 		public override String constructQueryFromFieldSet() {
 			String query = super.constructQueryFromFieldSet();
 
-			for (UserRestApi.WhereEqualsQueryParameters queryEqualsParam : UserRestApi.WhereEqualsQueryParameters.values()) {
-				if (RestApiUtils.isParamPresent(queryEqualsParam.name())) {
-					query += whereEquals(query, queryEqualsParam.name(), RestApiUtils.getParamSafe(queryEqualsParam.name()));
-				}
+			if (RestApiUtils.isParamPresent(UserRestApi.WhereEqualsQueryParameters.isActive.name())) {
+				query += whereBooleanEquals(
+					query, 
+					UserRestApi.WhereEqualsQueryParameters.isActive.name(), 
+					RestApiUtils.getParamSafe(UserRestApi.WhereEqualsQueryParameters.isActive.name())
+				);
+			}
+
+			if (RestApiUtils.isParamPresent(UserRestApi.WhereEqualsQueryParameters.isEmployeeCustomField.name())) {
+				query += whereBooleanEquals(
+					query, 
+					UserRestApi.WhereEqualsQueryParameters.isEmployeeCustomField.name(), 
+					RestApiUtils.getParamSafe(UserRestApi.WhereEqualsQueryParameters.isEmployeeCustomField.name())
+				);
+			}
+
+			if (RestApiUtils.isParamPresent(UserRestApi.WhereEqualsQueryParameters.Username.name())) {
+				query += whereStringEquals(
+					query, 
+					UserRestApi.WhereEqualsQueryParameters.Username.name(), 
+					RestApiUtils.getParamSafe(UserRestApi.WhereEqualsQueryParameters.Username.name())
+				);
 			}
 
 			return query;
@@ -85,6 +104,7 @@ global with sharing class UserRestApi {
 
 		public UserWrapper(User user) {
 			this.id = user.Id;
+			this.isActive = user.IsActive;
 			this.email = user.Email;
 			this.name = user.Name;
 			this.username = user.Username;

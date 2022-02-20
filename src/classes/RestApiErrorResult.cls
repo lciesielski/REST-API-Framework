@@ -19,5 +19,5 @@ public virtual class RestApiErrorResult extends RestApiResult {
 			RestContext.response.statusCode = ExceptionUtils.EXCEPTION_TO_REST_RESPONSE_STATUS_CODE.get(ex.getTypeName());
 		}
 	}
-	
+
 }
