@@ -4,6 +4,13 @@ public without sharing virtual class RestApiBase {
 		Object validateContext();
 	}
 
+	public interface IntegrationItem {
+		RestApiResult getLogic();
+		RestApiResult postLogic();
+		RestApiResult putLogic();
+		RestApiResult deleteLogic();
+	}
+
 	public static Boolean isParamPresent(String key) {
 		return 
 			RestContext.request != null &&

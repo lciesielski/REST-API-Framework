@@ -29,7 +29,11 @@ public virtual class RestApiSuccessResult extends RestApiResult {
 	public virtual class ResultItem {
 		protected Boolean checkForPopulatedField(Set<String> populatedFieldNames, SObjectField userField) {
 			return populatedFieldNames.contains(userField.getDescribe().getName());
-		} 
+		}
+
+		public virtual ResultItem initialize(Object item) {
+			throw new ExceptionUtils.MethodNotImplementedException();
+		}
 	}
 
 }
