@@ -22,6 +22,7 @@ jobs:
         distribution: 'temurin'
 
     - name: Check code for high priority rules
+      id: pmd
       uses: pmd/pmd-github-action@v1
       with:
         version: 'latest'
