@@ -1,4 +1,4 @@
-@isTest
+@IsTest
 private class UserApiExternalIntegrationTest {
 
 	@testSetup
@@ -6,7 +6,7 @@ private class UserApiExternalIntegrationTest {
 		update new User(Id = UserInfo.getUserId(), IsEmployee__c = true);
 	}
 
-	@isTest
+	@IsTest
 	private static void itShouldGetUserWithSpecifiedEmployeeCustomField() {
 		// Given
 		final Set<String> responseWrapperTypes = new Set<String>();
@@ -45,7 +45,7 @@ private class UserApiExternalIntegrationTest {
 		);
 	}
 
-	@isTest
+	@IsTest
 	private static void itSohuldHandleInvalidIntegrationError() {
 		// Given
 		RestApiTestBase.setRestContextRequestWithParams(new Map<String, String>{
@@ -65,7 +65,7 @@ private class UserApiExternalIntegrationTest {
 		);
 	}
 
-	@isTest
+	@IsTest
 	private static void itShouldRejectUnimplementedMethods() {
 		// Given
 		final UserApiExternalIntegration userInternalIntegration = 

@@ -1,4 +1,4 @@
-@isTest
+@IsTest
 public class RestApiTestBase {
 
 	public static void setRestContextRequestWithParams(Map<String, String> params) {

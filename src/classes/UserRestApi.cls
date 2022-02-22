@@ -1,15 +1,10 @@
 @RestResource(urlMapping='/v1/users')
 global without sharing class UserRestApi implements RestApiBase.Integration {
 
-	@testVisible
+	@TestVisible
 	private enum AllowedIntegration {
 		INTERNAL,
 		EXTERNAL
-	}
-
-	@testVisible
-	private enum ContextParameter {
-		context
 	}
 
 	@HttpGet
@@ -51,7 +46,9 @@ global without sharing class UserRestApi implements RestApiBase.Integration {
 	}
 
 	public static Object validateContext() {
-		final String contextParameterValue = RestApiBase.getParamSafe(ContextParameter.context.name());
+		final String contextParameterValue = RestApiBase.getParamSafe(
+			RestApiBase.ContextParameter.context.name()
+		);
 		
 		for (AllowedIntegration integration : AllowedIntegration.values()) {
 			if (contextParameterValue == integration.name()) {

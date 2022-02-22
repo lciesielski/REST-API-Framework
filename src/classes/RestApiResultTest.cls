@@ -1,7 +1,7 @@
-@isTest
+@IsTest
 private class RestApiResultTest {
 
-	@isTest
+	@IsTest
 	private static void itShouldHandleExpectedException() {
 		// Given
 		RestContext.response = new RestResponse();
@@ -26,7 +26,7 @@ private class RestApiResultTest {
 		);
 	}
 
-	@isTest
+	@IsTest
 	private static void itShouldHandleUnexpectedException() {
 		// Given
 		RestContext.response = new RestResponse();
@@ -46,7 +46,7 @@ private class RestApiResultTest {
 		);
 	}
 
-	@isTest
+	@IsTest
 	private static void itSohuldTestSuccessResult() {
 		// Given
 		final RestApiSuccessResult successResult = new RestApiSuccessResult();

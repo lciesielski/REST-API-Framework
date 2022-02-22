@@ -2,7 +2,7 @@ public virtual class RestApiErrorResult extends RestApiResult {
 
 	private final Boolean success = false;
 
-	@testVisible
+	@TestVisible
 	private String errorCode;
 	private String message;
 

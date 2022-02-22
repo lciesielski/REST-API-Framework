@@ -1,5 +1,6 @@
 public without sharing virtual class RestApiBase {
 
+	@SuppressWarnings('PMD.FieldNamingConventions')
 	public enum ContextParameter {
 		context
 	}

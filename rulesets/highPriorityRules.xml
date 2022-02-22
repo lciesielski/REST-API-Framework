@@ -13,7 +13,7 @@
    </rule>
 
    <rule ref="category/apex/bestpractices.xml/ApexUnitTestMethodShouldHaveIsTestAnnotation" 
-      message="Unit test methods must have isTest annotation instead of testMethod modifier">
+      message="Unit test methods must have IsTest annotation instead of testMethod modifier">
       <priority>1</priority>
    </rule>
 

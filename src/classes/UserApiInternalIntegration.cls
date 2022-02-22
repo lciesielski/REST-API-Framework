@@ -1,6 +1,7 @@
 public without sharing class UserApiInternalIntegration implements RestApiBase.IntegrationItem {
 
-	@testVisible
+	@TestVisible
+	@SuppressWarnings('PMD.FieldNamingConventions')
 	private enum WhereStringEqualsQueryParameter {
 		email,
 		username
@@ -58,7 +59,7 @@ public without sharing class UserApiInternalIntegration implements RestApiBase.I
 
 	}
 
-	@testVisible
+	@TestVisible
 	private class UserWrapper extends RestApiSuccessResult.ResultItem {
 		@TestVisible
 		Id id;

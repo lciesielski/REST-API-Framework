@@ -2,10 +2,10 @@ public virtual class RestApiSuccessResult extends RestApiResult {
 
 	private final Boolean success = true;
 
-	@testVisible
+	@TestVisible
 	protected Map<Type, List<ResultItem>> items;
 
-	@testVisible
+	@TestVisible
 	protected Integer totalSize {
 		get {
 			Integer result = 0; 
@@ -29,7 +29,7 @@ public virtual class RestApiSuccessResult extends RestApiResult {
 	}
 
 	public virtual class ResultItem {
-		@testVisible
+		@TestVisible
 		protected Boolean checkForPopulatedField(Set<String> populatedFieldNames, SObjectField field) {
 			return populatedFieldNames.contains(field.getDescribe().getName());
 		}

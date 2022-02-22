@@ -1,6 +1,7 @@
 public without sharing class UserApiExternalIntegration implements RestApiBase.IntegrationItem {
 
 	@TestVisible
+	@SuppressWarnings('PMD.FieldNamingConventions')
 	private enum WhereBoolEqualsQueryParameter {
 		isEmployeeCustomField
 	}

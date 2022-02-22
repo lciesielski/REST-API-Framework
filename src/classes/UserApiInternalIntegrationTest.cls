@@ -1,7 +1,7 @@
-@isTest
+@IsTest
 private class UserApiInternalIntegrationTest {
 
-	@isTest
+	@IsTest
 	private static void itShouldGetUserWithSpecifiedUsername() {
 		// Given
 		final Set<String> responseWrapperTypes = new Set<String>();
@@ -33,7 +33,7 @@ private class UserApiInternalIntegrationTest {
 		System.assertEquals(expectedUserCount, result.totalSize);
 	}
 
-	@isTest
+	@IsTest
 	private static void itSohuldHandleInvalidIntegrationError() {
 		// Given
 		RestApiTestBase.setRestContextRequestWithParams(new Map<String, String>{
@@ -53,7 +53,7 @@ private class UserApiInternalIntegrationTest {
 		);
 	}
 
-	@isTest
+	@IsTest
 	private static void itShouldRejectUnimplementedMethods() {
 		// Given
 		final UserApiInternalIntegration userInternalIntegration = 
