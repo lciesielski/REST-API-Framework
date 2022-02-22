@@ -2,6 +2,7 @@ public virtual class RestApiErrorResult extends RestApiResult {
 
 	private final Boolean success = false;
 
+	@testVisible
 	private String errorCode;
 	private String message;
 
@@ -15,7 +16,6 @@ public virtual class RestApiErrorResult extends RestApiResult {
 		} else {
 			this.errorCode = ExceptionUtils.EXCEPTION_TO_REST_RESPONSE_ERROR_CODE.get(ex.getTypeName());
 			this.message = ex.getMessage();
-
 			RestContext.response.statusCode = ExceptionUtils.EXCEPTION_TO_REST_RESPONSE_STATUS_CODE.get(ex.getTypeName());
 		}
 	}

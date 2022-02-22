@@ -1,5 +1,6 @@
 public without sharing class UserApiExternalIntegration implements RestApiBase.IntegrationItem {
 
+	@TestVisible
 	private enum WhereBoolEqualsQueryParameter {
 		isEmployeeCustomField
 	}
@@ -9,15 +10,15 @@ public without sharing class UserApiExternalIntegration implements RestApiBase.I
 	}
 
 	public RestApiResult postLogic() {
-		throw new ExceptionUtils.MethodNotImplementedException();
+		throw new ExceptionUtils.MethodNotImplementedException(Label.MethodNotImplemented);
 	}
 
 	public RestApiResult putLogic() {
-		throw new ExceptionUtils.MethodNotImplementedException();
+		throw new ExceptionUtils.MethodNotImplementedException(Label.MethodNotImplemented);
 	}
 
 	public RestApiResult deleteLogic() {
-		throw new ExceptionUtils.MethodNotImplementedException();
+		throw new ExceptionUtils.MethodNotImplementedException(Label.MethodNotImplemented);
 	}
 
 	private without sharing class UserQueryConstrutor extends RestApiBase.GetQueryConstructor {
@@ -56,6 +57,7 @@ public without sharing class UserApiExternalIntegration implements RestApiBase.I
 
 	}
 
+	@TestVisible
 	private class UserWrapper extends RestApiSuccessResult.ResultItem {
 		@TestVisible
 		Id id;

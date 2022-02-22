@@ -5,13 +5,22 @@
         <members>LogUtils</members>
         <members>LogUtilsTest</members>
         <members>RestApiBase</members>
+        <members>RestApiBaseTest</members>
         <members>RestApiErrorResult</members>
-        <members>UserApiExternalIntegration</members>
-        <members>UserApiInternalIntegration</members>
         <members>RestApiResult</members>
+        <members>RestApiResultTest</members>
         <members>RestApiSuccessResult</members>
+        <members>RestApiTestBase</members>
+        <members>UserApiExternalIntegration</members>
+        <members>UserApiExternalIntegrationTest</members>
+        <members>UserApiInternalIntegration</members>
+        <members>UserApiInternalIntegrationTest</members>
         <members>UserRestApi</members>
         <name>ApexClass</name>
+    </types>
+    <types>
+        <members>CustomLabels</members>
+        <name>CustomLabels</name>
     </types>
     <types>
         <members>User</members>

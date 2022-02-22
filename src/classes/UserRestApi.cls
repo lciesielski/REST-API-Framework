@@ -1,19 +1,15 @@
 @RestResource(urlMapping='/v1/users')
 global without sharing class UserRestApi implements RestApiBase.Integration {
 
+	@testVisible
 	private enum AllowedIntegration {
 		INTERNAL,
 		EXTERNAL
 	}
 
+	@testVisible
 	private enum ContextParameter {
 		context
-	}
-
-	private enum WhereEqualsQueryParameter {
-		isActive,
-		isEmployeeCustomField,
-		username
 	}
 
 	@HttpGet
@@ -29,13 +25,11 @@ global without sharing class UserRestApi implements RestApiBase.Integration {
 				}
 				when null {
 					throw new ExceptionUtils.IntegrationNotAllowedException(
-						'Integration is not allowed for this endpoint.'
+						Label.IntegrationNotAllowed
 					);
 				}
 				when else {
-					throw new UnexpectedException(
-						'Unexpected exception.'
-					);
+					throw new UnexpectedException(Label.UnexpectedException);
 				}
 			}
 		} catch (Exception ex) {

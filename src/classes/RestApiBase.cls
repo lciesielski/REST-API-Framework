@@ -1,5 +1,9 @@
 public without sharing virtual class RestApiBase {
 
+	public enum ContextParameter {
+		context
+	}
+
 	public interface Integration {
 		Object validateContext();
 	}

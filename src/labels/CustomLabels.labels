@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+	<labels>
+		<fullName>ExpectedException</fullName>
+		<categories>UnitTests</categories>
+		<language>en_US</language>
+		<protected>false</protected>
+		<shortDescription>ExpectedException</shortDescription>
+		<value>Exception should be thrown</value>
+	</labels>
+	<labels>
+		<fullName>IntegrationNotAllowed</fullName>
+		<categories>Exceptions</categories>
+		<language>en_US</language>
+		<protected>false</protected>
+		<shortDescription>IntegrationNotAllowed</shortDescription>
+		<value>Integration is not allowed for this endpoint</value>
+	</labels>
+	<labels>
+		<fullName>IncorrectMessage</fullName>
+		<categories>UnitTests</categories>
+		<language>en_US</language>
+		<protected>false</protected>
+		<shortDescription>IncorrectMessage</shortDescription>
+		<value>Error message is incorrect, actuall message {0}</value>
+	</labels>
+	<labels>
+		<fullName>IncorrectValue</fullName>
+		<categories>UnitTests</categories>
+		<language>en_US</language>
+		<protected>false</protected>
+		<shortDescription>IncorrectMessage</shortDescription>
+		<value>Object value does not match expected value {0}, actuall object value {1}'</value>
+	</labels>
+	<labels>
+		<fullName>MethodNotImplemented</fullName>
+		<categories>Exceptions</categories>
+		<language>en_US</language>
+		<protected>false</protected>
+		<shortDescription>MethodNotImplemented</shortDescription>
+		<value>Method is not implemented</value>
+	</labels>
+	<labels>
+		<fullName>RecordCountMismatch</fullName>
+		<categories>UnitTests</categories>
+		<language>en_US</language>
+		<protected>false</protected>
+		<shortDescription>RecordCountMismatch</shortDescription>
+		<value>'Record count mismatch, expected {0}, actuall {1}'</value>
+	</labels>
+	<labels>
+		<fullName>ResponseTypeAssertFailure</fullName>
+		<categories>UnitTests</categories>
+		<language>en_US</language>
+		<protected>false</protected>
+		<shortDescription>ResponseTypeAssertFailure</shortDescription>
+		<value>Response does not contain expected wrapper, actuall wrappers {0}</value>
+	</labels>
+	<labels>
+		<fullName>UnexpectedException</fullName>
+		<categories>Exceptions</categories>
+		<language>en_US</language>
+		<protected>false</protected>
+		<shortDescription>UnexpectedException</shortDescription>
+		<value>Unexpected exception</value>
+	</labels>
+</CustomLabels>

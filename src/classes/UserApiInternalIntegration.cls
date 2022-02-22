@@ -1,5 +1,6 @@
 public without sharing class UserApiInternalIntegration implements RestApiBase.IntegrationItem {
 
+	@testVisible
 	private enum WhereStringEqualsQueryParameter {
 		email,
 		username
@@ -10,15 +11,15 @@ public without sharing class UserApiInternalIntegration implements RestApiBase.I
 	}
 
 	public RestApiResult postLogic() {
-		throw new ExceptionUtils.MethodNotImplementedException();
+		throw new ExceptionUtils.MethodNotImplementedException(Label.MethodNotImplemented);
 	}
 
 	public RestApiResult putLogic() {
-		throw new ExceptionUtils.MethodNotImplementedException();
+		throw new ExceptionUtils.MethodNotImplementedException(Label.MethodNotImplemented);
 	}
 
 	public RestApiResult deleteLogic() {
-		throw new ExceptionUtils.MethodNotImplementedException();
+		throw new ExceptionUtils.MethodNotImplementedException(Label.MethodNotImplemented);
 	}
 
 	private without sharing class UserQueryConstrutor extends RestApiBase.GetQueryConstructor {
@@ -57,6 +58,7 @@ public without sharing class UserApiInternalIntegration implements RestApiBase.I
 
 	}
 
+	@testVisible
 	private class UserWrapper extends RestApiSuccessResult.ResultItem {
 		@TestVisible
 		Id id;

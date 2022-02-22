@@ -2,12 +2,14 @@ public virtual class RestApiSuccessResult extends RestApiResult {
 
 	private final Boolean success = true;
 
+	@testVisible
 	protected Map<Type, List<ResultItem>> items;
 
+	@testVisible
 	protected Integer totalSize {
 		get {
 			Integer result = 0; 
-			for (Type key : items?.keySet()) {
+			for (Type key : items.keySet()) {
 				result += items.get(key).size(); 
 			}
 			return result;
@@ -27,12 +29,13 @@ public virtual class RestApiSuccessResult extends RestApiResult {
 	}
 
 	public virtual class ResultItem {
-		protected Boolean checkForPopulatedField(Set<String> populatedFieldNames, SObjectField userField) {
-			return populatedFieldNames.contains(userField.getDescribe().getName());
+		@testVisible
+		protected Boolean checkForPopulatedField(Set<String> populatedFieldNames, SObjectField field) {
+			return populatedFieldNames.contains(field.getDescribe().getName());
 		}
 
 		public virtual ResultItem initialize(Object item) {
-			throw new ExceptionUtils.MethodNotImplementedException();
+			throw new ExceptionUtils.MethodNotImplementedException(Label.MethodNotImplemented);
 		}
 	}
 
