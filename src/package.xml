@@ -4,10 +4,10 @@
         <members>ExceptionUtils</members>
         <members>LogUtils</members>
         <members>LogUtilsTest</members>
+        <members>RestApiBase</members>
         <members>RestApiErrorResult</members>
         <members>RestApiResult</members>
         <members>RestApiSuccessResult</members>
-        <members>RestApiUtils</members>
         <members>UserRestApi</members>
         <name>ApexClass</name>
     </types>

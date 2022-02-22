@@ -1,7 +1,16 @@
 @RestResource(urlMapping='/v1/users')
-global with sharing class UserRestApi {
+global without sharing class UserRestApi implements RestApiBase.Integration {
 
-	public enum WhereEqualsQueryParameters {
+	private enum AllowedIntegration {
+		INTERNAL,
+		EXTERNAL
+	}
+
+	private enum ContextParameter {
+		context
+	}
+
+	private enum WhereEqualsQueryParameter {
 		isActive,
 		isEmployeeCustomField,
 		username
@@ -11,28 +20,52 @@ global with sharing class UserRestApi {
 	@ReadOnly
 	WebService static RestApiResult getUserDetails() {
 		try {
-			if (RestApiUtils.isParamPresent(WhereEqualsQueryParameters.isActive.name())) {
-				return new UserListWrapper(new UserQueryConstrutor().executeQuery());
-			} else {
-				throw new ExceptionUtils.RequiredParameterMissingException(
-					'Required parameter missing ' + WhereEqualsQueryParameters.isActive.name()
-				);
+			switch on (AllowedIntegration) validateContext() {
+				when INTERNAL {
+					return new UserListWrapper(
+						new UserQueryConstrutor()
+							.addToFieldSet(User.Email)
+							.addToFieldSet(User.Username)
+							.executeQuery()
+					);
+				}
+				when EXTERNAL {
+					if (RestApiBase.isParamPresent(WhereEqualsQueryParameter.username.name())) {
+						throw new ExceptionUtils.IntegrationNotAllowedException(
+							'You cannot specify username'
+						);
+					}
+
+					return new UserListWrapper(
+						new UserQueryConstrutor()
+							.addToFieldSet(User.IsEmployee__c)
+							.executeQuery()
+						);
+				}
+				when null {
+					throw new ExceptionUtils.IntegrationNotAllowedException(
+						'Integration is not allowed for this endpoint.'
+					);
+				}
+				when else {
+					throw new UnexpectedException(
+						'Unexpected exception.'
+					);
+				}
 			}
 		} catch (Exception ex) {
-			return RestApiUtils.handleException(UserRestApi.class, ex, null);
+			return RestApiBase.handleException(UserRestApi.class, ex, null);
 		}
 	}
 
-	private class UserQueryConstrutor extends RestApiUtils.GetQueryConstructor {
+	private without sharing class UserQueryConstrutor extends RestApiBase.GetQueryConstructor {
 		public UserQueryConstrutor() {
 			super();
 
-			this.contextSObjectDescription = User.SObjectType.getDescribe();
-			this.fieldSet = new Set<SObjectField> {
-				User.Email, 
+			super.contextSObjectDescription = User.SObjectType.getDescribe();
+			super.queryFieldSet = new Set<SObjectField> {
 				User.IsActive, 
-				User.Name,
-				User.Username
+				User.Name
 			};
 		}
 
@@ -40,30 +73,40 @@ global with sharing class UserRestApi {
 			return (List<User>) Database.query(this.constructQueryFromFieldSet());
 		}
 
-		public override String constructQueryFromFieldSet() {
+		public UserQueryConstrutor addToFieldSet(SObjectField userField) {
+			super.queryFieldSet.add(userField);
+			return this;
+		}
+
+		public UserQueryConstrutor removeFromFieldSet(SObjectField userField) {
+			super.queryFieldSet.remove(userField);
+			return this;
+		}
+
+		protected override String constructQueryFromFieldSet() {
 			String query = super.constructQueryFromFieldSet();
 
-			if (RestApiUtils.isParamPresent(UserRestApi.WhereEqualsQueryParameters.isActive.name())) {
+			if (RestApiBase.isParamPresent(UserRestApi.WhereEqualsQueryParameter.isActive.name())) {
 				query += whereBooleanEquals(
 					query, 
-					UserRestApi.WhereEqualsQueryParameters.isActive.name(), 
-					RestApiUtils.getParamSafe(UserRestApi.WhereEqualsQueryParameters.isActive.name())
+					UserRestApi.WhereEqualsQueryParameter.isActive.name(), 
+					getParamSafe(UserRestApi.WhereEqualsQueryParameter.isActive.name())
 				);
 			}
 
-			if (RestApiUtils.isParamPresent(UserRestApi.WhereEqualsQueryParameters.isEmployeeCustomField.name())) {
+			if (RestApiBase.isParamPresent(UserRestApi.WhereEqualsQueryParameter.isEmployeeCustomField.name())) {
 				query += whereBooleanEquals(
 					query, 
-					UserRestApi.WhereEqualsQueryParameters.isEmployeeCustomField.name(), 
-					RestApiUtils.getParamSafe(UserRestApi.WhereEqualsQueryParameters.isEmployeeCustomField.name())
+					UserRestApi.WhereEqualsQueryParameter.isEmployeeCustomField.name(), 
+					getParamSafe(UserRestApi.WhereEqualsQueryParameter.isEmployeeCustomField.name())
 				);
 			}
 
-			if (RestApiUtils.isParamPresent(UserRestApi.WhereEqualsQueryParameters.Username.name())) {
+			if (RestApiBase.isParamPresent(UserRestApi.WhereEqualsQueryParameter.Username.name())) {
 				query += whereStringEquals(
 					query, 
-					UserRestApi.WhereEqualsQueryParameters.Username.name(), 
-					RestApiUtils.getParamSafe(UserRestApi.WhereEqualsQueryParameters.Username.name())
+					UserRestApi.WhereEqualsQueryParameter.Username.name(), 
+					getParamSafe(UserRestApi.WhereEqualsQueryParameter.Username.name())
 				);
 			}
 
@@ -89,6 +132,8 @@ global with sharing class UserRestApi {
 		
 		@TestVisible
 		Boolean isActive;
+		@TestVisible
+		Boolean isEmployee;
 
 		@TestVisible
 		String email;
@@ -103,12 +148,27 @@ global with sharing class UserRestApi {
 		}
 
 		public UserWrapper(User user) {
-			this.id = user.Id;
-			this.isActive = user.IsActive;
-			this.email = user.Email;
-			this.name = user.Name;
-			this.username = user.Username;
+			final Set<String> populatedFieldNames = user.getPopulatedFieldsAsMap().keySet();
+
+			this.id = checkForPopulatedField(populatedFieldNames, Schema.User.Id) ? user.Id : null;
+			this.isActive = checkForPopulatedField(populatedFieldNames, Schema.User.IsActive) ? user.IsActive : null;
+			this.isEmployee = checkForPopulatedField(populatedFieldNames, Schema.User.IsEmployee__c) ? user.IsEmployee__c : null;
+			this.email = checkForPopulatedField(populatedFieldNames, Schema.User.Email) ? user.Email : null;
+			this.name = checkForPopulatedField(populatedFieldNames, Schema.User.Name) ? user.Name : null;
+			this.username = checkForPopulatedField(populatedFieldNames, Schema.User.Username) ? user.Username : null;
 		}
+	}
+
+	public static Object validateContext() {
+		final String contextParameterValue = RestApiBase.getParamSafe(ContextParameter.context.name());
+		
+		for (AllowedIntegration integration : AllowedIntegration.values()) {
+			if (contextParameterValue == integration.name()) {
+				return integration;
+			}
+		}
+
+		return null;
 	}
 
 }

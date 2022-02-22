@@ -26,6 +26,10 @@ public virtual class RestApiSuccessResult extends RestApiResult {
 		}
 	}
 
-	public abstract class ResultItem {}
-	
+	public virtual class ResultItem {
+		protected Boolean checkForPopulatedField(Set<String> populatedFieldNames, SObjectField userField) {
+			return populatedFieldNames.contains(userField.getDescribe().getName());
+		} 
+	}
+
 }

@@ -1,4 +1,8 @@
-public without sharing class RestApiUtils {
+public without sharing virtual class RestApiBase {
+
+	public interface Integration {
+		Object validateContext();
+	}
 
 	public static Boolean isParamPresent(String key) {
 		return 
@@ -29,15 +33,15 @@ public without sharing class RestApiUtils {
 		return new RestApiErrorResult(ex);
 	}
 
-	public virtual class GetQueryConstructor {
+	public without sharing virtual class GetQueryConstructor {
 
 		protected DescribeSObjectResult contextSObjectDescription;
-		protected Set<SObjectField> fieldSet;
+		protected Set<SObjectField> queryFieldSet;
 
 		protected virtual String constructQueryFromFieldSet() {
 			String query = 'SELECT ';
 
-			for (SObjectField field : fieldSet) {
+			for (SObjectField field : queryFieldSet) {
 				query += field.getDescribe(FieldDescribeOptions.FULL_DESCRIBE).getName() + ',';
 			}
 
