@@ -60,7 +60,7 @@ public without sharing class UserApiInternalIntegration implements RestApiBase.I
 	}
 
 	@TestVisible
-	private class UserWrapper extends RestApiSuccessResult.ResultItem {
+	private class UserWrapper extends UserRestApi.UserWrapper {
 		@TestVisible
 		Id id;
 

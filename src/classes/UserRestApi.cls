@@ -38,12 +38,14 @@ global without sharing class UserRestApi implements RestApiBase.Integration {
 
 			for (User user : users) {
 				addToResult(
-					wrapperType, 
-					((RestApiSuccessResult.ResultItem) wrapperType.newInstance()).initialize(user)
+					UserWrapper.class, 
+					((UserWrapper) wrapperType.newInstance()).initialize(user)
 				);
 			}
 		}
 	}
+
+	public abstract class UserWrapper extends RestApiSuccessResult.ResultItem {}
 
 	public static Object validateContext() {
 		final String contextParameterValue = RestApiBase.getParamSafe(
