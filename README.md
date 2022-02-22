@@ -11,12 +11,16 @@ I found out that while Salesforce trigger handlers do get much love in the terms
 
 ## Information About Implementation
 
-This was built and is validated using standard Salesforce Developer Org
+The solution provides a sample base to work with and extend upon. It will recognize integration based on `context` parameter and run specified integration logic. This guarantees separation of logic, e.g. between integration that will expose PII data and integration that will expose only employee information. This can be even further "locked up" by checking for specific integration user and\or sending secret key. 
+
+Depending on integration count switch statement can be replaced with something more dynamic. For example, you  could create an Integration Executor class that implements an interface with a common method that will be dynamically initialized and run based on integration enum. For similar dynamic solution, you can check [Dynamic Campaign Membership Resolver](https://github.com/lciesielski/DynamicCampaignMembershipResolver) (especially `CampaignMembershipUtils` class).
+
+This was built and is validated using standard Salesforce Developer Org.
 
 ### Prerequisites
 
-Salesforce developer sandbox or production
-Tool for deployment (_ant_ or _sfdx_)
+* Salesforce developer sandbox or production
+* Tool for deployment (_ant_ or _sfdx_)
 
 ### Installation
 
@@ -24,4 +28,15 @@ Run deployment target with your deployment tool with files specified in package.
 
 ### Usage
 
-TODO
+For manual REST tests I generally use the excellent [Workbench](https://workbench.developerforce.com/restExplorer.php)
+In input field you will have to supply proper endpoint and parameters e.g.
+
+```
+/services/apexrest/v1/users?context=internal
+```
+
+or
+
+```
+/services/apexrest/v1/users?context=external
+```

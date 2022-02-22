@@ -47,10 +47,19 @@ private class RestApiResultTest {
 	}
 
 	@IsTest
-	private static void itSohuldTestSuccessResult() {
+	private static void itShouldTestSuccessResult() {
 		// Given
 		final RestApiSuccessResult successResult = new RestApiSuccessResult();
 		final RestApiSuccessResult.ResultItem successResultItem = new RestApiSuccessResult.ResultItem();
+
+		// When
+		try {
+			successResultItem.initialize(UserInfo.getUserId());
+			System.assert(false, Label.ExpectedException);
+		} catch (ExceptionUtils.MethodNotImplementedException ex) {
+			//Then
+			System.assertEquals(Label.MethodNotImplemented, ex.getMessage());
+		}
 
 		// When
 		Boolean result = successResultItem.checkForPopulatedField(
