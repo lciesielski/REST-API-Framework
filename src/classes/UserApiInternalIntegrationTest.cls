@@ -24,7 +24,7 @@ private class UserApiInternalIntegrationTest {
 		}
 
 		System.assert(
-			result.items.containsKey(UserApiInternalIntegration.UserWrapper.class), 
+			result.items.containsKey(UserRestApi.UserWrapper.class), 
 			String.format(
 				Label.ResponseTypeAssertFailure, 
 				new List<String>{JSON.serialize(responseWrapperTypes)}
